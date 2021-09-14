@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
+import BodyText from '../components/BodyText';
 import Colors from '../constants/colors';
+import { Ionicons } from '@expo/vector-icons';
+import MainButton from '../components/MainButton';
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -14,7 +17,7 @@ const generateRandomBetween = (min, max, exclude) => {
   return randNum;
 };
 
-const GameScreen = ({ userChoice, onGameOver, onRestartGame }) => {
+const GameScreen = ({ userChoice, onGameOver }) => {
   const [currentGuess, setCurrentGuess] = useState(
     generateRandomBetween(1, 100, userChoice)
   );
@@ -51,29 +54,25 @@ const GameScreen = ({ userChoice, onGameOver, onRestartGame }) => {
   };
   return (
     <View style={styles.screen}>
-      <Text>Opponent's Guess</Text>
+      <BodyText>Opponent's Guess</BodyText>
       <NumberContainer styke={styles.NumberContainer}>
         {currentGuess}
       </NumberContainer>
       <Card style={styles.card}>
         <View style={styles.button}>
-          <Button
-            title="Lower"
-            onPress={nextGuessHandler.bind(this, 'lower')}
-            color={Colors.primary}
-          />
+          <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
+            <Ionicons name="remove-sharp" size={24} color="white" />
+          </MainButton>
         </View>
         <View style={styles.button}>
-          <Button
-            title="Greater"
+          <MainButton
+            colorSecondary
             onPress={nextGuessHandler.bind(this, 'greater')}
-            color={Colors.secondary}
-          />
+          >
+            <Ionicons name="add-sharp" size={24} color="white" />
+          </MainButton>
         </View>
       </Card>
-      <View style={styles.card}>
-        <Button title="Restart The Game" onPress={onRestartGame} />
-      </View>
     </View>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Button,
   TouchableWithoutFeedback,
@@ -9,8 +8,11 @@ import {
   Alert,
 } from 'react-native';
 import Card from '../components/Card';
+import BodyText from '../components/BodyText';
+import TitleText from '../components/TitleText';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
+import MainButton from '../components/MainButton';
 
 import Colors from '../constants/colors';
 
@@ -35,7 +37,6 @@ const StartGame = ({ onStartGame }) => {
         { text: 'Okay', style: 'destructive', onPress: resetInputHandler },
       ]);
     }
-    console.log(chooseNumber);
     setConfirmed(true);
     setEnteredValue('');
     setSelectedNumber(chooseNumber);
@@ -44,11 +45,16 @@ const StartGame = ({ onStartGame }) => {
 
   let confirmedNumber = confirmed && (
     <Card style={styles.selectedNumberCard}>
-      <Text>Choose Number:</Text>
+      <BodyText>Choose Number:</BodyText>
       <NumberContainer style={styles.selectedNumber}>
         {selectedNumber}
       </NumberContainer>
-      <Button onPress={() => onStartGame(selectedNumber)} title="Start Game" />
+      <MainButton
+        style={styles.mainButton}
+        onPress={() => onStartGame(selectedNumber)}
+      >
+        Start Game
+      </MainButton>
     </Card>
   );
 
@@ -59,9 +65,9 @@ const StartGame = ({ onStartGame }) => {
       }}
     >
       <View style={styles.screen}>
-        <Text style={styles.title}>start a new game!</Text>
+        <TitleText>start a new game!</TitleText>
         <Card style={styles.inputContainer}>
-          <Text>Select A Number</Text>
+          <BodyText>Select A Number</BodyText>
           <Input
             autoCorrect={false}
             maxLength={2}
@@ -100,11 +106,7 @@ const styles = StyleSheet.create({
   screen: {
     padding: 10,
     alignItems: 'center',
-  },
-  title: {
-    textTransform: 'capitalize',
-    fontSize: 20,
-    marginVertical: 10,
+    flex: 1,
   },
   inputContainer: {
     width: 300,
@@ -112,7 +114,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
-  input: {},
+  input: {
+    width: 50,
+    marginBottom: 15,
+  },
   buttonContainer: {
     flexDirection: 'row',
     width: '100%',
@@ -130,5 +135,8 @@ const styles = StyleSheet.create({
   selectedNumber: {
     width: 50,
     textAlign: 'center',
+  },
+  mainButton: {
+    marginTop: 10,
   },
 });
