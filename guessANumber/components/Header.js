@@ -16,13 +16,15 @@ const Header = ({ title }) => {
 const styles = StyleSheet.create({
   header: {
     width: '100%',
-    backgroundColor: Colors.primary,
+    backgroundColor: Platform.OS === 'android' ? Colors.primary : '#fff',
     paddingHorizontal: 10,
     paddingVertical: 30,
+    borderBottomColor: Platform.OS === 'ios' ? '#ccc' : 'transparent',
+    borderBottomWidth: Platform.OS === 'ios' ? 2 : 0,
   },
   title: {
     textAlign: 'center',
-    color: '#fff',
+    color: Platform.OS === 'ios' ? Colors.primary : '#fff',
   },
 });
 
