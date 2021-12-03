@@ -59,14 +59,13 @@ const GameScreen = ({ userChoice, onGameOver }) => {
 
     direction === 'lower'
       ? (currentHigh.current = currentGuess)
-      : (currentLow.current = currentGuess + 1);
+      : (currentLow.current = parseInt(currentGuess) + 1);
 
     const nextNumber = generateRandomBetween(
       currentHigh.current,
       currentLow.current,
       currentGuess
     );
-    console.log(nextNumber + ' -------------------- nextNumber');
     setCurrentGuess(nextNumber);
     setPastGusses(currentGuesses => [nextNumber.toString(), ...currentGuesses]);
   };
