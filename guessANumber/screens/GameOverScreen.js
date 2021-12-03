@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Button, Image, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Text,
+  ScrollView,
+} from 'react-native';
 
 import BodyText from '../components/BodyText';
 import TitleText from '../components/TitleText';
@@ -8,12 +15,16 @@ import MainButton from '../components/MainButton';
 
 const GameOverScreen = props => {
   return (
-    <View style={styles.screen}>
-      <TitleText>Game Over</TitleText>
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={require('../assets/success.png')} />
-        {/* this is how to add url images and other props working on the local image too  */}
-        {/* <Image
+    <ScrollView>
+      <View style={styles.screen}>
+        <TitleText>Game Over</TitleText>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={require('../assets/success.png')}
+          />
+          {/* this is how to add url images and other props working on the local image too  */}
+          {/* <Image
           style={styles.image}
           fadeDuration={1000}
           resizeMode="cover"
@@ -21,19 +32,20 @@ const GameOverScreen = props => {
             uri: 'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
           }}
         /> */}
+        </View>
+        <BodyText style={styles.text}>
+          Game Rounds:
+          <Text style={styles.textHightlight}>{props.gameRounds}</Text>
+        </BodyText>
+        <BodyText style={styles.text}>
+          Number Was:
+          <Text style={styles.textHightlight}>{props.userChoice}</Text>
+        </BodyText>
+        <View style={styles.buttonContainer}>
+          <MainButton onPress={props.startNewGame}>New Game</MainButton>
+        </View>
       </View>
-      <BodyText style={styles.text}>
-        Game Rounds:
-        <Text style={styles.textHightlight}>{props.gameRounds}</Text>
-      </BodyText>
-      <BodyText style={styles.text}>
-        Number Was:
-        <Text style={styles.textHightlight}>{props.userChoice}</Text>
-      </BodyText>
-      <View style={styles.buttonContainer}>
-        <MainButton onPress={props.startNewGame}>New Game</MainButton>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -42,12 +54,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 30,
+    paddingVertical: 10,
   },
   imageContainer: {
-    width: 300,
-    height: 300,
-    borderRadius: 150,
+    width: Dimensions.get('window').width * 0.7,
+    height: Dimensions.get('window').width * 0.7,
+    borderRadius: (Dimensions.get('window').width * 0.7) / 2,
     overflow: 'hidden',
     borderColor: '#000',
     borderWidth: 3,

@@ -4,7 +4,7 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
 import Header from './components/Header';
-import StartGame from './screens/StartGame';
+import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOverScreen';
 
@@ -37,7 +37,7 @@ const App = () => {
     setGuessRounds(0);
   };
 
-  let renderContent = <StartGame onStartGame={startGameHandler} />;
+  let renderContent = <StartGameScreen onStartGame={startGameHandler} />;
 
   if (userNumber && guessRounds <= 0)
     renderContent = (
