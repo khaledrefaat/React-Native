@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -14,11 +14,30 @@ import Colors from '../constants/colors';
 import MainButton from '../components/MainButton';
 
 const GameOverScreen = props => {
+  const [detectedDeviceWidth, setDetectedDeviceWidth] = useState(
+    Dimensions.get('window').width
+  );
+
+  useEffect(() => {
+    const setDetectedWidth = () =>
+      setDetectedDeviceWidth(Dimensions.get('window').width);
+    Dimensions.addEventListener('change', setDetectedWidth);
+
+    return () => Dimensions.removeEventListener('change', setDetectedWidth);
+  });
+
   return (
     <ScrollView>
       <View style={styles.screen}>
         <TitleText>Game Over</TitleText>
-        <View style={styles.imageContainer}>
+        <View
+          style={{
+            ...styles.imageContainer,
+            width: detectedDeviceWidth * 0.7,
+            height: detectedDeviceWidth * 0.7,
+            borderRadius: (detectedDeviceWidth * 0.7) / 2,
+          }}
+        >
           <Image
             style={styles.image}
             source={require('../assets/success.png')}
@@ -57,9 +76,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   imageContainer: {
-    width: Dimensions.get('window').width * 0.7,
-    height: Dimensions.get('window').width * 0.7,
-    borderRadius: (Dimensions.get('window').width * 0.7) / 2,
     overflow: 'hidden',
     borderColor: '#000',
     borderWidth: 3,

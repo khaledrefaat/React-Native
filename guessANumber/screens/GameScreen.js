@@ -18,14 +18,14 @@ const generateRandomBetween = (min, max, exclude) => {
 };
 
 const GameScreen = ({ userChoice, onGameOver }) => {
-  async function changeScreenOrientation() {
-    await ScreenOrientation.lockAsync(
-      ScreenOrientation.OrientationLock.PORTRAIT
-    );
-  }
-  useEffect(() => {
-    changeScreenOrientation();
-  }, []);
+  // async function changeScreenOrientation() {
+  //   await ScreenOrientation.lockAsync(
+  //     ScreenOrientation.OrientationLock.PORTRAIT
+  //   );
+  // }
+  // useEffect(() => {
+  //   changeScreenOrientation();
+  // }, []);
 
   // ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
 
