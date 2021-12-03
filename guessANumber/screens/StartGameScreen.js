@@ -64,10 +64,7 @@ const StartGame = ({ onStartGame }) => {
       <NumberContainer style={styles.selectedNumber}>
         {selectedNumber}
       </NumberContainer>
-      <MainButton
-        style={styles.mainButton}
-        onPress={() => onStartGame(selectedNumber)}
-      >
+      <MainButton onPress={() => onStartGame(selectedNumber)}>
         Start Game
       </MainButton>
     </Card>
@@ -152,8 +149,5 @@ const styles = StyleSheet.create({
   selectedNumber: {
     width: 50,
     textAlign: 'center',
-  },
-  mainButton: {
-    marginTop: 10,
   },
 });
